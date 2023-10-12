@@ -10,6 +10,7 @@ const Fashion = () => {
         const response = await fetch(
           'http://127.0.0.1:5555/blogposts'
         );
+        console.log(response)
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -23,6 +24,8 @@ const Fashion = () => {
 
     fetchData();
   }, []);
+
+  console.log(posts);
 
   return (
     <div>
@@ -39,7 +42,7 @@ const Fashion = () => {
                       <img
                         src={post.image_link}
                         className="img-fluid rounded-start"
-                        alt={post.title}
+                        alt={post.name}
                       />
                     </div>
                     <div className="col-md-8">

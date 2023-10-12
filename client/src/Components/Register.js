@@ -47,6 +47,11 @@ const Register = () => {
     // Handle form submission for user registration
     // Implement your actual registration logic
 
+    // TODO test matching passwords functionality
+    if (formData.password !== formData.confirm_password) {
+        setErrorMessage('Passwords do not match');
+        return;
+    }
 
     const response = await loginRequest({
       email: formData.email,

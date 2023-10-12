@@ -190,9 +190,12 @@ class UserLogin(Resource):
         if not user:
             return make_response({'message': 'User not found'}, 401)
 
+        print(user.password)
+
         # Check if the provided password is correct
-        print(check_password(user.password, password))
-        if not check_password(user.password, password):
+        print(bcrypt.check_password_hash(user.password, password))
+
+        if not bcrypt.check_password_hash(user.password, password):
             return make_response({'message': 'Invalid password'}, 401)
 
         # Generate access token for the user

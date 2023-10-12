@@ -22,8 +22,10 @@ const HomePage = () => {
       }
     };
 
-    fetchData();
+    fetchData()
   }, []);
+
+  console.log(posts);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

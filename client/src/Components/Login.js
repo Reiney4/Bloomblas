@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from '../utils/api';
 import {useNavigate} from "react-router-dom";
 
-const Login = () => {
-
+const Login = ({ loggedInUser, setLoggedInUser }) => {
     const navigate = useNavigate();
+    if (loggedInUser) {
+        navigate('/');
+    }
 
-    const [loggedInUser, setLoggedInUser] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
 
     const [formData, setFormData] = useState({
@@ -17,16 +18,19 @@ const Login = () => {
     const loginRequest = async ({email, password}) => {
         await axios.post('/users/login', {email, password})
             .then((response) => {
+                console.log(response)
                 if (response.status === 200) {
                     setLoggedInUser(response.data);
                     localStorage.setItem('token', response.data.access_token);
                     localStorage.setItem('user', JSON.stringify(response.data));
                 }
+
+                navigate('/');
             }).catch((error) => {
                 // Handle error.
                 console.log(error);
 
-                if (error.response.status === 400) {
+                if (error.response.status === 401 || error.response.status === 400) {
                     setErrorMessage(error.response.data.message);
                 }
             });

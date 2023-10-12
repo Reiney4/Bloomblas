@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navigation = () => {
+const Navigation = ({ loggedInUser }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ backgroundColor: '#ffffff', color: 'black' }}>
       <div className="container">
@@ -40,20 +40,25 @@ const Navigation = () => {
             </li>
           </ul>
         </div>
-        <div className="ml-auto">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link id="Login" className="btn btn-primary" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link id="Login" className="btn btn-primary" to="/register">
-                Register
-              </Link>
-            </li>
-          </ul>
-        </div>
+
+        { loggedInUser ? (
+            <h5>{loggedInUser.user_email}</h5>
+        ) : (
+            <div className="ml-auto">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link id="Login" className="btn btn-primary" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link id="Login" className="btn btn-primary" to="/register">
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            </div>
+        ) }
       </div>
     </nav>
   );

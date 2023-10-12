@@ -8,7 +8,7 @@ const Fashion = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://api.npoint.io/5c7dcd28332ef04ef139/blog_posts/'
+          'http://127.0.0.1:5555/blogposts'
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -45,7 +45,7 @@ const Fashion = () => {
                     <div className="col-md-8">
                       <div className="card-body">
                         <h5 className="card-title">{post.title}</h5>
-                        <p className="card-text">{post.content_description}</p>
+                        <p className="card-text">{post.description}</p>
                         <p className="card-text">
                           <small className="text-body-secondary">
                             Author: {post.author}

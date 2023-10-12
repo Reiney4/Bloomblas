@@ -13,8 +13,8 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120))
-    password = db.Column(db.String(200))
     email = db.Column(db.String(100))
+    password = db.Column(db.String(150))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     

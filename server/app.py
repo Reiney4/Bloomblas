@@ -39,6 +39,9 @@ class UserData:
         self.username = username
         self.password = password
 
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
+
 
 class UserRegister(Resource):
     def post(self):
@@ -61,7 +64,7 @@ class UserRegister(Resource):
 
         # Create a new user
         # new_user = UserData(email=email, username=username, password=hashed_password)
-        final_new_user = User(**{"email": email, "username": username})
+        final_new_user = User(**{"email": email, "username": username, "password": hashed_password})
         db.session.add(final_new_user)
         db.session.commit()
 
@@ -143,27 +146,62 @@ api.add_resource(Blogposts, '/blogposts')
 
 
 # Replace this with your actual user authentication logic
-def authenticate(email, password):
-    # Example: Check if email and password match in your database
-    user = User(email, password)
-    if user:  # Replace with your actual authentication logic
-        return user
+# def authenticate(email, password):
+#     # Example: Check if email and password match in your database
+#     user = User(email, password)
+#     if user:  # Replace with your actual authentication logic
+#         return user
 
 # Example resource to handle user login
+# class UserLogin(Resource):
+#     def post(self):
+#         data = request.get_json()
+#         print(data)
+#         email = data.get('email')
+#         password = data.get('password')
+#
+#         user = authenticate(email, password)
+#
+#         if not user:
+#             return {'message': 'Invalid credentials'}, 401
+#
+#         # Identity can be any data that is json serializable
+#         access_token = create_access_token(identity=email)
+#         return {'user_email': email, 'access_token': access_token}
+
+
+def check_password(self, password):
+    return bcrypt.check_password_hash(self.password, password)
+
+
 class UserLogin(Resource):
     def post(self):
         data = request.get_json()
         email = data.get('email')
         password = data.get('password')
 
-        user = authenticate(email, password)
+        # Check if the required data is provided
+        if not email or not password:
+            return make_response({'message': 'Missing required data'}, 400)
 
+        user = User.query.filter_by(email=email).first()
+
+        # Check if the user exists
         if not user:
-            return {'message': 'Invalid credentials'}, 401
+            return make_response({'message': 'User not found'}, 401)
 
-        # Identity can be any data that is json serializable
+        # Check if the provided password is correct
+        print(check_password(user.password, password))
+        if not check_password(user.password, password):
+            return make_response({'message': 'Invalid password'}, 401)
+
+        # Generate access token for the user
         access_token = create_access_token(identity=email)
-        return {'user_email': email, 'access_token': access_token}
+        userdata = {'user_email': email, 'access_token': access_token}
+        return make_response(userdata, 200)
+
+api.add_resource(UserLogin, '/users/login')
+
 
 # Example protected resource
 class ProtectedResource(Resource):
@@ -173,7 +211,6 @@ class ProtectedResource(Resource):
         current_user = get_jwt_identity()
         return {'user_email': current_user}, 200
 
-api.add_resource(UserLogin, '/users/login')
 api.add_resource(ProtectedResource, '/protected')
 
 

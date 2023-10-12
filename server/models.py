@@ -13,6 +13,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120))
+    password = db.Column(db.String(200))
     email = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -20,13 +21,15 @@ class User(db.Model):
     blogposts = db.relationship('User_blogposts', backref='user')
 
     def __repr__(self):
-        return f'(id={self.id}, username={self.username}, email={self.email})'
+        return f'(id={self.id}, username={self.username}, email={self.email}, password={self.password})'
 
 class Blogpost(db.Model):
     __tablename__ = 'blogposts'
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    name = db.Column(db.String(120))
+    title = db.Column(db.String(120))
+    author = db.Column(db.String(100))
+    image_link = db.Column(db.String(200))
     description = db.Column(db.String(100))
     ratings = db.Column(db.String())
     created_at = db.Column(db.DateTime, server_default=db.func.now())
@@ -35,7 +38,7 @@ class Blogpost(db.Model):
     users = db.relationship('User_blogposts', backref='blogpost')
 
     def __repr__(self):
-        return f'(id={self.id}, name={self.name}, description={self.description}, ratings={self.ratings})'
+        return f'(id={self.id}, title={self.title}, author={self.author} image_link={self.image_link} description={self.description}, ratings={self.ratings})'
 
     @validates('description')
     def checks_description(self, key, description):

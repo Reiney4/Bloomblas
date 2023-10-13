@@ -31,11 +31,76 @@ with app.app_context():
         {"name": "Basqueparfum", "description": "let your scent tell your story"},
     ]
 
-    for data in blogposts_data:
+    new_blogposts = [
+        {
+            "title": "Healthy Eating Habits",
+            "author": "Sophia Miller",
+            "image_link": "https://media.istockphoto.com/id/1325578537/photo/happy-indian-mother-having-fun-with-her-daughter-outdoor-family-and-love-concept-focus-on-mum.jpg?b=1&s=612x612&w=0&k=20&c=SJ9XOGSV7al3uhCzrGZx6AiEdxk5AF_MO9o0h_ifyCg=",
+            "content_description": "Tips and tricks for maintaining a balanced and healthy diet."
+        },
+        {
+            "title": "Traveling on a Budget",
+            "author": "Michael Brown",
+            "image_link": "https://media.istockphoto.com/id/1358737791/photo/affectionate-mother-touching-noses-with-her-young-son.jpg?b=1&s=612x612&w=0&k=20&c=11IoXtZYAFJ4yj-2gsa8NRlgqBg4TxWlBdCCb7cuv6o=",
+            "content_description": "Explore budget-friendly travel options without compromising on experiences."
+        },
+        {
+            "title": "Mindful Living: Finding Inner Peace",
+            "author": "Ava Wilson",
+            "image_link": "https://example.com/mindfulness2.jpg",
+            "content_description": "Practices and strategies for achieving mindfulness and inner peace in a fast-paced world."
+        },
+        {
+            "title": "Fitness for a Better Life",
+            "author": "Ethan Clark",
+            "image_link": "https://media.istockphoto.com/id/1266364224/photo/father-helps-young-daughter-ride-skateboard.jpg?b=1&s=612x612&w=0&k=20&c=8qcErts6ZQ7NRujJaQ8XDSzuhBN3iUtHhHRKrZwADGc=",
+            "content_description": "The importance of physical fitness and its positive impact on your overall well-being."
+        },
+        {
+            "title": "DIY Home Decor Ideas",
+            "author": "Olivia Turner",
+            "image_link": "https://media.istockphoto.com/id/1324381802/photo/on-a-road-trip-with-our-dog.jpg?b=1&s=612x612&w=0&k=20&c=adZMYLDT8aEBwHhFiZoBiTjdUpTUdvS8hb07DOVcUo4=",
+            "content_description": "Creative DIY projects to decorate your home on a budget."
+        },
+        {
+            "title": "Gardening Tips for Urban Dwellers",
+            "author": "Daniel Moore",
+            "image_link": "https://media.istockphoto.com/id/1319763314/photo/mature-multiethnic-couple-laughing-and-embracing-at-home.jpg?b=1&s=612x612&w=0&k=20&c=xvVGN-GhUFmJl2MK5e9snC-kyY3GVJWDSMwc2P9kWLQ=",
+            "content_description": "How to cultivate a green oasis in your city apartment."
+        },
+        {
+            "title": "Healthy Relationships: Building Strong Connections",
+            "author": "Mia Davis",
+            "image_link": "https://media.istockphoto.com/id/1159094800/photo/mother-father-children-son-and-daughter-on-sunset.jpg?b=1&s=612x612&w=0&k=20&c=9jmKRfE4SNjKCLTYimpDFMI8NhHgNS73Bozbhrdc_T4=",
+            "content_description": "Tips on nurturing and maintaining healthy relationships with loved ones."
+        },
+        {
+            "title": "The Art of Time Management",
+            "author": "Liam Smith",
+            "image_link": "https://media.istockphoto.com/id/1308292203/photo/multiracial-women-doing-yoga-exercise-with-social-distance-for-coronavirus-outbreak-at-park.jpg?b=1&s=612x612&w=0&k=20&c=KQl4ANlBQFcFbaSTeuJ6mgql4-wIwPtzEBZ3BHdU8a8=",
+            "content_description": "Effective time management techniques for improved productivity and work-life balance."
+        },
+        {
+            "title": "Exploring Hobbies: Unleash Your Creativity",
+            "author": "Nora Johnson",
+            "image_link": "https://media.istockphoto.com/id/1300273437/photo/and-then-you-came-along-and-turned-my-life-around.jpg?b=1&s=612x612&w=0&k=20&c=_sTn5Q80pP0tTeWxj7YaFYcPYsovnXl8Ai0FIpvV0uQ=",
+            "content_description": "Discover the benefits of pursuing hobbies and exploring your creative side."
+        },
+        {
+            "title": "Sustainable Living: Eco-Friendly Choices",
+            "author": "Henry White",
+            "image_link": "https://media.istockphoto.com/id/1285301614/photo/young-man-arms-outstretched-by-the-sea-at-sunrise-enjoying-freedom-and-life-people-travel.jpg?b=1&s=612x612&w=0&k=20&c=LIHDLfQsTnhmdQXAXjwo-NN3DW2RaXHaRSCTvjtNDSY=",
+            "content_description": "How to adopt a more sustainable and eco-friendly lifestyle in everyday practices."
+        }
+    ]
+
+    for data in new_blogposts:
         # Provide valid values for 'ratings' and 'updated_at' when inserting a blog post
         blogpost_data = {
-            "name": data["name"],
-            "description": data["description"],
+            "title": data["title"],
+            "description": data["content_description"],
+            "author": data["author"],
+            "image_link": data["image_link"],
             "ratings": "Good",  # Provide a valid rating value
             "updated_at": datetime.utcnow(),  # Provide the current timestamp
         }

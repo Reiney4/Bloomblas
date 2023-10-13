@@ -1,0 +1,44 @@
+#landing{
+
+    color:white
+}
+#landing_img{
+    height: 500px;
+}
+#text-title{
+    margin-top: 90px;
+    font-size: 4em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+#topics{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 550px;
+    align-items: center ;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(73, 196, 155);
+}
+
+.card{
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+#subscribe-form{
+    width: 380px;
+    margin-left: 10px;
+}
+#subscribe-description{
+    margin-left: 12px;
+}
+#subscribe-title{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(73, 196, 155);
+    margin-left: 20px;
+    font-size: 2em;
+    }
+#subscribe-button{
+    background-color:rgb(73, 196, 155); 
+    color: white;
+}

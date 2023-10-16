@@ -14,11 +14,11 @@ exceptiongroup
 executing
 Faker
 filelock
-Flask==2.3.3
+Flask==2.2.5
 Flask-Cors
 Flask-Migrate
 Flask-RESTful
-Flask-SQLAlchemy==3.1.1
+Flask-SQLAlchemy==3.0.2
 future
 gevent
 greenlet
